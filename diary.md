@@ -27,7 +27,7 @@
     2. 优化函数传递时候的不必要的临时对象复制，采用const或者&等方式使得内存占用减小
     3. 有没有办法生成64位的程序，64位的程序是不是可以使用到更多的内存？  
     从图中可以看到64位的测试程序可以申请5G的内存都不会导致程序崩溃，因此64位程序确实可以申请到更多的内存空间。但是64位程序生成好像有很多麻烦，貌似是MFC下的很多函数和64位都有些冲突。
-    ![64位程序内存测试](imgs\64位程序内存测试.png)
+    ![64位程序内存测试](imgs/64位程序内存测试.png)
     4. 能不能考虑采用多线程的方式，一个线程的占用内存不超过1G的话，搞几个线程是不是能够调用到更多的内存？
 --------------------------------------------------
 ## 2017年7月3号
@@ -36,9 +36,9 @@
       今天一共看了3小时22分钟，剩余2小时38分钟
 - [x] **优化内存，我觉得目前来看可行性较高的是，7月2号提出的第2、3个办法**  
     优化内存的工作已经完成，程序内存奔溃的主要原因是因为`pano_image = blendImageofTwoHeight2(pano_image,low_image);`这段代码，这里面pano_image是一个结构体，结构体里面有`IplImage *`指针，当`blendImageofTwoHeight2`结束之后，`pano_image`被释放了，但是指针指向的图像数据没有被释放，导致了占用内存越积越多，最终内存崩溃。能够发现这一问题的主要原因是重开了一个测试程序，申请了7226\*11064\*3的图像，一开始程序占用内存为：
-![20170703_use_memory](imgs\20170703_use_memory.png)
+![20170703_use_memory](imgs/20170703_use_memory.png)
     然后申请图像之后，占用内存为：
-![  20170703_use_memory_large_image](imgs\20170703_use_memory_large_image.png)
+![  20170703_use_memory_large_image](imgs/20170703_use_memory_large_image.png)
     当申请完如此之大的图像之后，内存占用仅有230MB，根本不需要1GB的内存，说明原始程序肯定是内存没有清干净，于是排查到了上面那段代码，从而问题解决。因此也不需要重新编译64位版本的程序了。  
     这个例子给了我一个结论，就是如果x是很大的对象的话，`x=f(x,y)`这样的函数形式是很不靠谱的，这样会导致程序分配两倍的x对象的内存，如果采用`f(x,y)`这样的形式更加节省内存。
 ---------------------------------------------------------
@@ -72,7 +72,7 @@
     C:\Program Files\MATLAB\R2015b\extern\lib\win64\microsoft
     ```
     具体调用代码如下，另外在程序的头文件中需要包含'retinex.h'
-![C++_USE_Matlab](imgs\c++_USE_Matlab.png)   
+![C++_USE_Matlab](imgs/c++_USE_Matlab.png)   
 
   我们看到在C++里面调用的形式为`retinex(1,mwOutPath,mwPath)`在C++中调用MATLAB的函数如果有返回参数的话，则输入形式为:`retinex(输出参数数量,输出参数,...,输出参数,输入参数,输入参数)`
 - [ ] **考虑一下毕业设计的方向吧，虽然可能说是改变的可能不太大了，还是有空能好好想一下吧**  
@@ -92,7 +92,7 @@
 - [x] **精简程序**  
 精简程序过程中，发现无法生成包含Matlab函数的部分，其如果要移植的话必须要安装MCRinstall.exe，而且Matlab2015a版本的MCR还巨大，有700多兆，以前的32位的貌似只有两三百兆，于是再找其他的方法。
 在Matlab中输入`coder`能够弹出如下界面，然后选择要生成的.M文件。这种方式可以生成独立的C或C++代码，而不必依赖于Matlab运行库，但是我选择了retinex进去，发现很多函数都不支持生成，因此作罢。
-![MatlabCoder](imgs\matlabcoder.png)
+![MatlabCoder](imgs/matlabcoder.png)
 ------------------------------------------------------------
 ## 2017年7月7号
 ### 目标  
@@ -128,16 +128,16 @@
 - [ ] **尝试了几个网上的代码**
 1. [ofxGiantImage](https://github.com/timknapen/ofxGiantImage)  
 这个工具依赖于OpenFramework开源库，从昨天开始一直安装这个OpenFramework开源库，但是一开始安装的是V0.7.1_VS2010_Release，一直无法编译，在iconic.h中一直报编码错误，无法解决。于是尝试最新版V0.9.8版，官网上说明这个版本是在VS2015下编译的，于是再电脑上装VS2015 Community版，下完iso文件，打开发现还需要装7G的Visual C++支持包，醉了。最终是找到了V0.7.4_vs2010_release这个版本的OpenFramework库，下载解压之后打开projectGenerator\projectGenerator.exe文件生成新项目，打开界面是这样的：  
-![of_projectGenerator](imgs\of_projectgenerator.png)
+![of_projectGenerator](imgs/of_projectgenerator.png)
 运行生成的项目，导入ofxGiantImage.h和cpp文件发现是可以运行的，运行界面如下，自带的2万\*1万5分辨率的图像无法加载出来，在图像读取的时候就已经崩溃了，加载10000\*7500像素的图片是没有问题的，而且占用内存非常低。图像的显示是挺流畅的，但是无法进行图像的缩放和鼠标拖拽平移。
-![ofxGiantImage_Dialog](imgs\ofxgiantimage_dialog.png)
-![ofxGiantImage_Memory](imgs\ofxgiantimage_memory.png)
+![ofxGiantImage_Dialog](imgs/ofxgiantimage_dialog.png)
+![ofxGiantImage_Memory](imgs/ofxgiantimage_memory.png)
 在查看图像显示的源码的时候，看到显示了图像的格网。
-![ofxGiantImage_Grid](imgs\ofxgiantimage_grid.png)
+![ofxGiantImage_Grid](imgs/ofxgiantimage_grid.png)
 通过查看代码，我们可以发现程序将图像分成15\*20大小的格网，然后把每个格网的图像放到一个`vector <ofTexture*> tiles`的向量中，其中分带格网分配内存`tile->allocate(tileWidth, tileHeight, GL_RGB);`并不会增加图像内存消耗，然后当图像清空之后，内存占用就非常低了，挺奇怪的。
 占用内存降低可能的原因是该程序用了纹理来显示图片，而且其图像貌似还没有完整覆盖整个图像区域，每个纹理是512\*512的区域，转成纹理会导致图像的质量下降，如下进行对比：
-![ofxGiantImage_Image](imgs\ofxgiantimage_image.png)
-![IrfanView_Image](imgs\irfanview_image.png)
+![ofxGiantImage_Image](imgs/ofxgiantimage_image.png)
+![IrfanView_Image](imgs/irfanview_image.png)
 同样的一块区域，原始图像的清晰度显然要更高，而在程序之中的清晰度不够，因此数据质量得到了损失。
 2. Simple2D
 基于OpenGL实现的图像显示程序，其中有一个auto关键字，好像在VS2010下面支持并不好，于是转到VS2015设置一下项目的平台工具集属性就可以直接编译运行了，但是显示的图片无法平移缩放，显示的图像貌似也有一些问题。
@@ -174,11 +174,11 @@
 * 另外ArcMap中的机制也是比较奇怪的，感觉其占用内存的一直特别低，一直稳定在100MB左右，其硬盘读写速度也很低，创建完金字塔也是如此。但是在浏览缩放的过程中，非常卡顿，经常是出现空白，要等很一会才能出现影像。
 * mySketch的话，利用纹理加载影像，在一开始占用内存较多，从341.1MB跳到665.9MB再降到341.1MB，但是之后一直稳定在40多兆的样子吧，但是观察显存占用从824MB涨至1170MB，多出了446MB，我估计是将图像读取至显存中了，导致内存占用变低。
 * ENVI的话，读取完图像之后程序占用内存稳定在357.6MB，在显示图像的时候瞬间增加到410多兆，随后降低至359.5MB，显存占用没有发生变换，说明ENVI是将图片完整读取到内存中的，在显示的过程进行不断的切分，在浏览过程中程序并没有卡顿。
-![irfanView_Windows_contrast](imgs\irfanview_windows_contrast.png)
+![irfanView_Windows_contrast](imgs/irfanview_windows_contrast.png)
 irfanview、Windows照片查看器、myStetch的局部细节对比
-![imgs_contrast](imgs\imgs_contrast.png)
+![imgs_contrast](imgs/imgs_contrast.png)
 irfanview、Envi的局部细节对比
-![irfanView_envi_contrast](imgs\irfanview_envi_contrast.png)
+![irfanView_envi_contrast](imgs/irfanview_envi_contrast.png)
 -----------------------------------------------
 ### Git使用记录
 #### 1. 安装Git
@@ -212,7 +212,7 @@ The key's randomart image is:
 +----[SHA256]-----+
 ```
 * 生成完秘钥之后输入`ls`应该会有如下结果显示：
-![ls_git](imgs/ls_git.png)   
+![ls_git](imgs/ls_git.png)  
 其中id_rsa.pub就是秘钥，输入`cat id_rsa.pub`查看秘钥，复制这段秘钥从`ssh-rsa`开始一直到`Administrator@Ws-PC`，然后进入GitHub个人中心-->Edit Profile-->点击 SSH and GPG keys--> New SSH key-->输入标题，把刚才复制的秘钥粘贴到key文本框下-->点击Add SSH key完成秘钥添加。  
 * 输入`ssh -T git@github.com`测试SSH秘钥是否建立，如果成功则有`Hi ***! You've successfully authenticated,but GitHub does not proviede shell access`的提示，这说明你已经连接上你的。
 #### 3. 利用Git进行文件同步
