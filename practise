@@ -1,0 +1,58 @@
+
+
+### 分隔
+1
+*****
+2
+_______
+3
+- - - -
+4
+* * * *
+5
+-*-*----
+
+
+
+
+
+
+
+
+
+
+
+### 图片
+插入一张图片:
+![公式](imgs/11.png)
+### 链接
+插入一个链接：
+* [百度](wwww.baidu.com)
+还可以这样，插入一些购物网站：
+* [淘宝][taobao]
+* [京东][2]
+
+[taobao]: www.taobao.com
+[2]:www.jd.com
+
+
+
+
+
+### 代码框
+插入一段代码:
+```Matlab
+%-----------------------------------------------
+%% APPLYING DIFFERENT CONTRAST ENAHNCEMENT METHODS
+%-----------------------------------------------
+%Proposed Method
+[ SVD_DWT_img ] = SVD_DWT (original_img);
+%General Histogram Equalization
+GHE_img = histeq(original_img, 256);
+% Contrast Limited Adaptive Histogram Equalization
+CLAHE_img = adapthisteq(original_img);
+%Brightness Preserving Dynamic Histogram
+BPDHE_img = BPDHE(original_img);
+%Singular Value Equalization
+SVE_img = SVE(original_img);
+```

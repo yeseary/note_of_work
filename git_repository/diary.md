@@ -177,52 +177,8 @@
 ![irfanView_Windows_contrast](imgs\irfanview_windows_contrast.png)
 irfanview、Windows照片查看器、myStetch的局部细节对比
 ![imgs_contrast](imgs\imgs_contrast.png)
-irfanview、Envi的局部细节对比
+irfanview、Envi的局部细节对比 
 ![irfanView_envi_contrast](imgs\irfanview_envi_contrast.png)
------------------------------------------------
-### Git使用记录
-#### 1. 安装Git
-电脑系统是win10.因此下载的是[Git for windows](https://git-for-windows.github.io/)。安装过程都是采用默认的参数，一路下一步。
-#### 2. 创建Repository和SSH key
-##### 2.1 创建Repository
-打开GitHub网站-->进入个人主页-->Repositories-->New-->在[Repository name]输入名称HelloGit，在[Description]文本框中输入项目描述，免费用户只能选择Public-->勾选Initialize this repository with a README
-##### 2.2 创建SSH key
-打开安装好的Git Bash，输入命令设置ssh秘钥：`ssh-keygen`，
-运行之后需要输入存储秘钥的文件名以及查看密码，我这边都是没输，直接Enter按照默认进行下去，命令提示窗口输出：  
-```
-$ ssh-keygen
-Generating public/private rsa key pair.
-Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa):
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /c/Users/Administrator/.ssh/id_rsa.
-Your public key has been saved in /c/Users/Administrator/.ssh/id_rsa.pub.
-The key fingerprint is:
-SHA256:ndKHdah92wO0YBl0LFHZwwK1FYLW4aeolrgSh3QijQo Administrator@westchen-PC
-The key's randomart image is:
-+---[RSA 2048]----+
-|   .+o*=o.       |
-|    =o=++        |
-| o . +o...       |
-|Eo..+..o .       |
-|=.o..o..S .      |
-|+..+ .s. = .     |
-|.s= o o.. o      |
-|.o . . o..       |
-|o     . ..       |
-+----[SHA256]-----+
-```
-生成完秘钥之后输入`ls`应该会有如下结果显示：
-![ls_git](imgs\ls_git.png)   
-其中id_rsa.pub就是秘钥，输入`cat id_rsa.pub`查看秘钥，复制这段秘钥从`ssh-rsa`开始一直到`Administrator@Ws-PC`，然后进入GitHub个人中心-->Edit Profile-->点击 SSH and GPG keys--> New SSH key-->输入标题，把刚才复制的秘钥粘贴到key文本框下-->点击Add SSH key完成秘钥添加。  
-输入`ssh -T git@github.com`测试SSH秘钥是否建立，如果成功则有`Hi ***! You've successfully authenticated,but GitHub does not proviede shell access`的提示。
-#### 3. 利用Git进行文件同步
-我们现在在Github上创建了一个空的Repository，接下来我们要把本地的文件提交到这个空的Repository中，首先我们需要在本地创建一个git，然后将本地的git文件同步到git服务器上去。
-##### 3.1 进行本地git文件的创建
-进入到需要同步的文件目录下:`cd /d/code/note`。这是指进入'D:/code/note'目录下（注意Windows下文件目录是反斜杠，这边是斜杠）。  
-输入`git init`进行本地git初始化，控制台提示`Initialized empty Git repository in D:/code/note/.git/`，输入`git add diary.md`，说明把当前目录下的diary.md文档加入到本地的git文件下了。输入`git commit -m 'first commit'`则把当前的修改进行了首次的提交，此时还没有提交到GitHub的服务器上。
-##### 3.2 将本地的git文件同步到服务器上
-
 ------------------------------------------------------------
 ## 2017年7月14号
 ### 目标  
