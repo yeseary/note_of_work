@@ -54,7 +54,7 @@
     mcc -W cpplib:retinex -T link:lib retinex.m
     ```
     看一下retinex.m文件的函数定义及参数列表：
-    ![retinex_function](imgs\retinex_function.png)   
+    ![retinex_function](imgs/retinex_function.png)   
 
     编译之后我们能得到很多文件，其中retinex.h、retinex.lib和retinex.dll这三个文件是我们需要的，把这三个文件分别放到程序的包含目录、库目录和dll目录（我是放到和.exe文件夹下的）里面，附加依赖库加入以下文件，第一个是生成的lib文件，后面几个是Matlab运行的依赖库。  
     ```
@@ -156,20 +156,22 @@
 - [ ] **竖井全图显示模块**  
 首先我们来看一下三个打开全图的程序的耗费内存情况：
 
-| 程序名称 |    程序阶段  |耗费内存情况|
+| 程序名称 |    程序阶段  |耗费内存情况|加载、浏览是否流畅
 | :------------- | :------------- | :------------- |
-| irfanView 32bit|完成加载、显示| 334.2MB|
-| ENVI 4.7 32bit|完成数据加载、读取| 357.6MB |
-| ENVI 4.7 32bit|进行数据浏览| 410.1MB-->359.5MB |
-| cvtest 64bit|分配7226*15712大小的图像|327.0MB|
-| cvtest 64bit|用cvShowImage显示图像|659.6MB|
-| mySketch 64bit|加载数据阶段|665.9MB|
-| mySketch 64bit|纹理创建完成|40.1MB|
-| mySketch 64bit|数据浏览阶段|40.1MB+显存占用多出446MB|
-| mfcDrawCrack 32bit|分配7226*15712大小的图像|334.1MB|
-| mfcDrawCrack 32bit|分配压缩比例0.5的缩略图|415.4MB|
-| mfcDrawCrack 32bit|分配500*500的局部放大图|416.1MB|
-| mfcDrawCrack 32bit|压缩比例0.1,500*500的局部放大图|338.6MB|
+| windows照片查看器|完成加载、显示|无法查看|加载速度很快、浏览很快|
+| irfanView 32bit|完成加载、显示| 334.2MB|加载速度一般、浏览很快|
+| ArcMap 10.1|完成数据加载、数据浏览|100MB|加载速度很快、浏览卡顿需要等待加载（不创建金字塔）|
+| ENVI 4.7 32bit|完成数据加载、读取| 357.6MB |加载速度一般、浏览很快|
+| ENVI 4.7 32bit|进行数据浏览| 410.1MB-->359.5MB |加载速度一般、浏览很快|
+| testDemo 64bit|分配7226*15712大小的图像|327.0MB|加载速度一般、浏览卡住|
+| testDemo 64bit|用cvShowImage显示图像|659.6MB|加载速度一般、浏览卡住|
+| ofxGiantImage 64bit|加载数据阶段|665.9MB|加载速度慢、浏览非常流畅|
+| ofxGiantImage 64bit|纹理创建完成|40.1MB|加载速度慢、浏览非常流畅|
+| ofxGiantImage 64bit|数据浏览阶段|40.1MB+显存占用多出446MB|加载速度慢、浏览非常流畅|
+| mfcDrawCrack 32bit|分配7226*15712大小的图像|334.1MB|加载速度一般、浏览流畅|
+| mfcDrawCrack 32bit|分配压缩比例0.5的缩略图|415.4MB|加载速度一般、浏览流畅|
+| mfcDrawCrack 32bit|分配500*500的局部放大图|416.1MB|加载速度一般、浏览流畅|
+| mfcDrawCrack 32bit|压缩比例0.1,500*500的局部放大图|338.6MB|加载速度一般、浏览流畅|
 * 值得注意的是irfanView已经是实现了整个功能，占用内存比较稳定，这个程序肯定是没有分块的。在浏览缩放的过程中，浏览非常稳定。
 * 另外ArcMap中的机制也是比较奇怪的，感觉其占用内存的一直特别低，一直稳定在100MB左右，其硬盘读写速度也很低，创建完金字塔也是如此。但是在浏览缩放的过程中，非常卡顿，经常是出现空白，要等很一会才能出现影像。
 * mySketch的话，利用纹理加载影像，在一开始占用内存较多，从341.1MB跳到665.9MB再降到341.1MB，但是之后一直稳定在40多兆的样子吧，但是观察显存占用从824MB涨至1170MB，多出了446MB，我估计是将图像读取至显存中了，导致内存占用变低。
@@ -180,63 +182,61 @@ irfanview、Windows照片查看器、myStetch的局部细节对比
 irfanview、Envi的局部细节对比
 ![irfanView_envi_contrast](imgs/irfanview_envi_contrast.png)
 -----------------------------------------------
-### Git使用记录
-#### 1. 安装Git
-电脑系统是win10.因此下载的是[Git for windows](https://git-for-windows.github.io/)。安装过程都是采用默认的参数，一路下一步。
-#### 2. 创建Repository和SSH key
-##### 2.1 创建Repository
-* 打开GitHub网站-->进入个人主页-->Repositories-->New-->在[Repository name]输入名称HelloGit，在[Description]文本框中输入项目描述，免费用户只能选择Public-->勾选Initialize this repository with a README
-##### 2.2 创建SSH key
-* 打开安装好的Git Bash，输入命令设置ssh秘钥：`ssh-keygen`，运行之后需要输入存储秘钥的文件名以及查看密码，我这边都是没输，直接Enter按照默认进行下去，命令提示窗口输出：  
-```
-$ ssh-keygen
-Generating public/private rsa key pair.
-Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa):
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in /c/Users/Administrator/.ssh/id_rsa.
-Your public key has been saved in /c/Users/Administrator/.ssh/id_rsa.pub.
-The key fingerprint is:
-SHA256:ndKHdah92wO0YBl0LFHZwwK1FYLW4aeolrgSh3QijQo Administrator@westchen-PC
-The key's randomart image is:
-+---[RSA 2048]----+
-|   .+o*=o.       |
-|    =o=++        |
-| o . +o...       |
-|Eo..+..o .       |
-|=.o..o..S .      |
-|+..+ .s. = .     |
-|.s= o o.. o      |
-|.o . . o..       |
-|o     . ..       |
-+----[SHA256]-----+
-```
-* 生成完秘钥之后输入`ls`应该会有如下结果显示：
-![ls_git](imgs/ls_git.png)  
-其中id_rsa.pub就是秘钥，输入`cat id_rsa.pub`查看秘钥，复制这段秘钥从`ssh-rsa`开始一直到`Administrator@Ws-PC`，然后进入GitHub个人中心-->Edit Profile-->点击 SSH and GPG keys--> New SSH key-->输入标题，把刚才复制的秘钥粘贴到key文本框下-->点击Add SSH key完成秘钥添加。  
-* 输入`ssh -T git@github.com`测试SSH秘钥是否建立，如果成功则有`Hi ***! You've successfully authenticated,but GitHub does not proviede shell access`的提示，这说明你已经连接上你的。
-#### 3. 利用Git进行文件同步
-* 我们现在在Github上创建了一个空的Repository，接下来我们要把本地的文件提交到这个空的Repository中，首先我们需要在本地创建一个git项目，然后将本地的git项目同步到git服务器上去。
-##### 3.1 进行本地git文件的创建
-* 进入到需要同步的文件目录下:`cd /d/code/note`。这是指进入'D:/code/note'目录下（注意Windows下文件目录是反斜杠，这边是斜杠）。  
-* 输入`git init`进行本地git初始化，控制台提示`Initialized empty Git repository in D:/code/note/.git/`，说明已经初始化完毕。  
-* 输入`git add diary.md`，是把当前目录下的diary.md文档加入到本地的git项目下了，如果嫌这样添加太慢，则输入`git add -A`则会将本目录及子目录下所有的文件都加入git项目中。  
-* 输入`git show`可以查看本地git项目添加了多少文件以及文件的状态。如果你不知道还有什么命令以及命令的用法，输入`git --help`可以查看帮助文档。  
-* 输入`git commit -m 'first commit'`则把当前的修改进行了首次的提交，当然此时还没有提交到GitHub的服务器上。需要注意的是，只有进行commit之后才会把更改保存到本地的git项目中。
-##### 3.2 将本地的git文件同步到服务器上
-* 当我们把本地的git项目编辑好之后，可以开始进行和服务器的同步了。这里面有很多的操作，在这边我们是想把本地的文件提交到服务器上，输入`git remote add origin git@github.com:用户名/Repository项目名称.git`其中用户名为你自己的用户名，Repository名称填写你刚才创建的空的Repository，这样的话你已经建立了此电脑和服务器上创建的项目的连接。  
-* 输入`git pull origin master --allow-unrelated-histories`，这句话是取回服务器的master更新，然后输入`git push origin master`将本地的git项目同步到服务器上，可以看到控制台输出如下结果：  
-```
-Counting objects: 5, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (5/5), 7.14 KiB | 0 bytes/s, done.
-Total 5 (delta 0), reused 0 (delta 0)
-To github.com:*****/******.git
-   5267a88..b8419dd  master -> master
-```
-这样就能完成同步了，打开自己的GitHub主页，进入到刚才的Repository中，可以看到刚才加载的文件都已经提交上来了。
-------------------------------------------------------------
 ## 2017年7月14号
+- [x] **参考blog_github.md文档**  
+
+------------------------------------------------------------
+## 2017年7月15号、2017年7月16号
+### 目标  
+- [ ] **基本是放飞自我中**  
+接下来要努力了，不能再这样子了。
+
+------------------------------------------------------------
+## 2017年7月17号
+### 目标  
+- [x] **开组会**  
+- [x] **其它**  
+* 下午刷了两道实验楼的C++题目，其中一道是走迷宫的题目，输入迷宫数据，给定起讫点，输出是否有可以走通的路径，是的话返回1，不是的话返回0。这道题目实际上是一个深度优先遍历的问题，但是需要注意的是需要排除掉之前已经走过的位置，否则会陷入无限的循环中。我这道题目做了有1个小时多，其中陷入卡顿的地方的是，一开始方向写错了，其次是没有判断出下一步是不是之前已经走过的地方。最终程序主体的伪代码如下:
+```
+int haveExit():
+    if 已经到达终点:
+      return 1;
+    if 路径为空:
+      if 第一次进入函数:
+        把起点加入路径;
+      else:
+        return 0;
+    for 四个方向:
+      根据当前位置计算下一步可能方向;
+      if 下一步没有出界 AND 下一步不是墙壁 AND 下一步没有出现在当前路径中:
+        把下一步加入路径中;
+        return haveExit();// 继续下一步
+      // 进行到这一步说明四个方向都不可能
+      移除当前位置;
+      return haveExit();//继续下一步
+```
+其中不出现当前路径中的话本来是可以查找栈中的元素来实现的，但是栈貌似不支持遍历的操作，可以设置一个和迷宫一样的数组，在第一次进入函数的时候初始化每个数组元素为0，每当走过一个点的时候就标记当前走过的点为1，当移除当前位置的话，把当前位置的点设为0。  
+* 另一个的话是修改程序中的错误，程序是基于C++14版本写的，其中的auto关键字和vector的使用cbegin和cend方法不曾见过，不过最后还是莫名奇妙的改出来了，程序实现的功能就是根据一个字符去分割一段字符串，返回的字符串是vector<string>类型的变量。
+* 晚上的话，查看一下恩施的旅游攻略，把来回的车票定了，把酒店确定下来了，但是还没有订。
+------------------------------------------------------------
+## 2017年7月18号
+### 目标  
+- [x] **一些事项**  
+* 把酒店订好。暂时不订景点门票。
+* 给《交通运输工程学报》打电话咨询论文进展，电话忙，下午再打。  
+下午打过，目前正在排队状态，处于等通知状态，那边的人说可能要到年底才会录用。
+
+------------------------------------------------------------
+## 2017年7月19号
+### 目标  
+- [ ] ** **  
+
+------------------------------------------------------------
+## 2017年7月20号
+### 目标  
+- [ ] ** **  
+
+------------------------------------------------------------
+## 2017年7月21号
 ### 目标  
 - [ ] ** **  
