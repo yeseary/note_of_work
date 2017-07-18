@@ -224,15 +224,173 @@ int haveExit():
 - [x] **一些事项**  
 * 把酒店订好。暂时不订景点门票。
 * 给《交通运输工程学报》打电话咨询论文进展，电话忙，下午再打。  
-下午打过，目前正在排队状态，处于等通知状态，那边的人说可能要到年底才会录用。
+下午打过，目前正在排队状态，论文处于等通知状态，那边的人说可能要到年底才会录用。
+* 工作书大概看了有1个半小时。这样
 
 ------------------------------------------------------------
 ## 2017年7月19号
 ### 目标  
+- [x] **楼赛**  
+这是道修改C++程序中的bug问题，修改的目的是:
+* 程序没有编译错误正常通过  
+* 程序使用追加的方式添加日志。
+程序的主要知识点是:
+* 智能指针（自动垃圾回收）
+* 单例模式
+* 文件操作
+其实文件主要出问题的地方也在于这几个知识点。
+* 程序采用了智能指针auto_ptr来表示当前的实例_instance。经过查阅，智能指针可以在程序超出作用域时自动调用析构函数，从而不需要进行手动的释放。我本身不是很懂这个，于是将原来的`auto_ptr<easyLogger> _instance;`改成了`static easyLogger *_instance;`非智能指针，然后手动写了下析构虚函数:
+```
+virtual ~easyLogger(void)
+{
+    if(_instance)
+    {
+        delete _instance;
+        _instance = NULL;
+    }
+}
+```
+另外把构造函数改成了如下:
+```
+public:
+	static easyLogger *myInst() {
+		if (NULL == _instance) {
+			_instance = new  easyLogger();
+		}
+		return _instance;
+	}
+```
+另外在最外面加上_instance的初始化语句`easyLogger *easyLogger::_instance = NULL;`
+将_instance申明成static是为了保证当前的_instance是唯一的。  
+C++单例模式也称为单件模式、单子模式。使用单例模式，保证一个类仅有一个实例，并提供一个访问它的全局访问点，该实例被所有程序模块共享。有很多地方需要这样的功能模块，如系统的日志输出等[cnblogs_d单例模式]。
+[cnblogs_d单例模式]:http://www.cnblogs.com/my_life/articles/2356709.html
+* 文件读写有问题，主要是原来的`ofs.open("shiyanloulogger.log");`并不是以追加的方式添加上去的，改成`ofs.open("shiyanloulogger.log",ios::app);`即可。
+* 还有一些小问题，比如string转char\*、传入地址而不是传值等。这些都是比较好改的。
+-----------------------------------------------------------
+程序虽然通过了，但是我现在觉得好像还是存在很多错误，首先附上改过之后的代码吧:
+```
+#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#include <memory>
+#include <ctime>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+class easyLogger
+{
+public:
+	static easyLogger *myInst() {
+		if (NULL == _instance) {
+			_instance = new  easyLogger();
+		}
+		return _instance;
+	}
+
+	void Log(const string& logInfo);
+
+private:
+	easyLogger(void) {}
+	virtual ~easyLogger(void) {}
+	friend class auto_ptr<easyLogger>;
+	static easyLogger *_instance;
+};
+easyLogger *easyLogger::_instance = NULL;
+void easyLogger::Log(const string& logInfo) {
+	ofstream ofs;
+	time_t t = time(0);
+
+	char tmp[100];
+	// [2017.07.12 13:50:36 Wednesday]
+	strftime(tmp, sizeof(tmp), "[%Y.%m.%d %X %A]", localtime(&t));
+
+	// write to easyLogger.log
+	ofs.open("shiyanloulogger.log",ios::app);
+	// ofs.write(logInfo.c_str(), logInfo.size());
+	ofs << logInfo.c_str()<<tmp<<endl;
+	ofs.close();
+}
+```
+* 并不是完全的单例模式。输入文件流应该是唯一的，应该在构造函数的时候就已经申请，然后在对象析构的时候进行释放，这样可以防止频繁地打开日志文件。
+* 释放数据有问题。总觉得在虚析构函数里面直接释放静态实例，是有些问题的。
+最终修改如下：
+```
+#pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#include <memory>
+#include <ctime>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+class easyLogger
+{
+public:
+	static easyLogger *myInst() {
+		if (NULL == _instance) {
+			_instance = new  easyLogger();
+			// write to easyLogger.log
+			_instance->ofs.open("shiyanloulogger.log",ios::app);
+		}
+		return _instance;
+	}
+
+	void Log(const string& logInfo);
+
+private:
+	easyLogger(void) {}
+	virtual ~easyLogger(void) {}
+	friend class auto_ptr<easyLogger>;
+	static easyLogger *_instance;
+	ofstream ofs;// 输出文件流
+	class CGarbo // 它的唯一工作就是在析构函数中删除easyLogger的实例
+	{
+	public:
+		~CGarbo()
+		{
+			if(easyLogger::_instance)
+			{
+				easyLogger::_instance->ofs.close();//关闭文件流
+				delete easyLogger::_instance;
+				easyLogger::_instance = NULL;
+			}
+		}
+	};
+	static CGarbo Garbo;
+};
+easyLogger *easyLogger::_instance = NULL;
+void easyLogger::Log(const string& logInfo) {
+	time_t t = time(0);
+	char tmp[100];
+	// [2017.07.12 13:50:36 Wednesday]
+	strftime(tmp, sizeof(tmp), "[%Y.%m.%d %X %A]", localtime(&t));
+	// ofs.write(logInfo.c_str(), logInfo.size());
+	ofs << logInfo.c_str()<<tmp<<endl;
+}
+```
+这样改的好处是：利用一个专门的静态类负责释放当前对象实例和关闭文件；文件在创建当前对象实例的时候，也进行创建，从而在整个对象实例的生命周期里，该文件句柄是一直存在的，直到该对象实例被释放的时候，文件也被关闭，这样不用每次写一行日志的时候就要重新生成打开关闭文件，效率较高。
+-----------------------------------------------------------
+- [x] **排序算法**  
+* 晚上写了下插入排序和快速排序的代码，并且建立了测试排序的环境。
+* 说到测试环境的话，我觉得
+------------------------------------------------------------
+## 2017年7月20号
+### 目标  
 - [ ] ** **  
 
 ------------------------------------------------------------
-## 2017年7月20号
+## 2017年7月21号
+### 目标  
+- [ ] ** **  
+------------------------------------------------------------
+## 2017年7月21号
+### 目标  
+- [ ] ** **  
+
+------------------------------------------------------------
+## 2017年7月21号
 ### 目标  
 - [ ] ** **  
 
