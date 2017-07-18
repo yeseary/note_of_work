@@ -23,8 +23,8 @@
 .markdown-preview:not([data-use-github-style]) table { margin: 1.5em 0px; }
 .markdown-preview:not([data-use-github-style]) th { color: rgb(255, 255, 255); }
 .markdown-preview:not([data-use-github-style]) th, .markdown-preview:not([data-use-github-style]) td { padding: 0.66em 1em; border: 1px solid rgb(75, 83, 98); }
-.markdown-preview:not([data-use-github-style]) pre, .markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
-.markdown-preview:not([data-use-github-style]) pre, .markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
+.markdown-preview:not([data-use-github-style]) code { color: rgb(255, 255, 255); background-color: rgb(58, 63, 75); }
+.markdown-preview:not([data-use-github-style]) pre.editor-colors { margin: 1.5em 0px; padding: 1em; font-size: 0.92em; border-radius: 3px; background-color: rgb(49, 54, 63); }
 .markdown-preview:not([data-use-github-style]) kbd { color: rgb(255, 255, 255); border-width: 1px 1px 2px; border-style: solid; border-color: rgb(75, 83, 98) rgb(75, 83, 98) rgb(62, 68, 81); background-color: rgb(58, 63, 75); }
 .markdown-preview[data-use-github-style] { font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif; line-height: 1.6; word-wrap: break-word; padding: 30px; font-size: 16px; color: rgb(51, 51, 51); overflow: scroll; background-color: rgb(255, 255, 255); }
 .markdown-preview[data-use-github-style] > :first-child { margin-top: 0px !important; }
@@ -96,14 +96,11 @@
 .markdown-preview[data-use-github-style] pre code::before, .markdown-preview[data-use-github-style] pre tt::before, .markdown-preview[data-use-github-style] pre code::after, .markdown-preview[data-use-github-style] pre tt::after { content: normal; }
 .markdown-preview[data-use-github-style] kbd { display: inline-block; padding: 3px 5px; font-size: 11px; line-height: 10px; color: rgb(85, 85, 85); vertical-align: middle; border-width: 1px; border-style: solid; border-color: rgb(204, 204, 204) rgb(204, 204, 204) rgb(187, 187, 187); border-radius: 3px; box-shadow: rgb(187, 187, 187) 0px -1px 0px inset; background-color: rgb(252, 252, 252); }
 .markdown-preview[data-use-github-style] a { color: rgb(51, 122, 183); }
-.markdown-preview[data-use-github-style] pre, .markdown-preview[data-use-github-style] code { color: inherit; }
-.markdown-preview[data-use-github-style] pre, .markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
+.markdown-preview[data-use-github-style] code { color: inherit; }
+.markdown-preview[data-use-github-style] pre.editor-colors { padding: 0.8em 1em; margin-bottom: 1em; font-size: 0.85em; border-radius: 4px; overflow: auto; }
 .scrollbars-visible-always .markdown-preview pre.editor-colors .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors .horizontal-scrollbar { visibility: hidden; }
 .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .vertical-scrollbar, .scrollbars-visible-always .markdown-preview pre.editor-colors:hover .horizontal-scrollbar { visibility: visible; }
-.markdown-preview del { text-decoration: none; position: relative; }
-.markdown-preview del::after { border-bottom: 1px solid black; content: ""; left: 0px; position: absolute; right: 0px; top: 50%; }
-.markdown-preview .flash { animation: flash 1s ease-out 1; outline: rgba(255, 0, 0, 0) solid 1px; }
-.markdown-preview .flash:not(li) { display: block; }
+.markdown-preview .task-list-item-checkbox { position: absolute; margin: 0.25em 0px 0px -1.4em; }
 .bracket-matcher .region {
   border-bottom: 1px dotted lime;
   position: absolute;
@@ -487,81 +484,369 @@ pre.editor-colors .fold-marker:after {
 }
 </style>
   </head>
-  <body class='markdown-preview'><h2>2017年6月30号</h2>
-<h3>目标</h3>
+  <body class='markdown-preview' data-use-github-style><h2 id="2017-6-30-">2017年6月30号</h2>
+<h3 id="-">目标</h3>
 <ul>
-<li>[x] <strong>学习MarkDown语法</strong><br>
-主要是学习了MarkDown的基础标签，诸如标题、列表、引用、
-图片和链接、粗体与斜体、代码框等的表示和使用。</li>
-<li>[x] <strong>将糯扎渡四号竖井的竖井导入至工程中</strong>
-<ol>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>学习MarkDown语法</strong><br>  主要是学习了MarkDown的基础标签，诸如标题、列表、引用、
+  图片和链接、粗体与斜体、代码框等的表示和使用。
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>将糯扎渡四号竖井的竖井导入至工程中</strong><ol>
 <li>首先是将生成的ProjectDB.sql文件和RawData.sql文件修改一下，然后运行将数据导入进来。</li>
 <li>然后是打开原始工程文档，修改一下VC++目录中的库目录和包含目录，然后
 修改一下DBSettings.xml中的数据库参数即可。</li>
 </ol>
-</li>
-<li>[ ] <strong>看三个小时的《程序员面试宝典》</strong>
-这个并没有完成，大概看了半个小时多吧。</li>
+
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>看三个小时的《程序员面试宝典》</strong>
+  这个并没有完成，大概看了半个小时多吧。
+</label></li>
 </ul>
 <hr>
-<h2>2017年7月1号</h2>
-<h3>目标</h3>
+<h2 id="2017-7-1-">2017年7月1号</h2>
+<h3 id="-">目标</h3>
 <ul>
-<li>[ ] <strong>看两个小时的《程序员面试宝典》，加上昨天剩下的一共是4个半小时</strong>
-今天看了一个半小时吧，这样还剩下3个小时。
-<br>第五章快看完了，打算接下来先把第五章看完，然后看第三部分，也就是
-第13章到第15章。</li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>看两个小时的《程序员面试宝典》，加上昨天剩下的一共是4个半小时</strong>
+  今天看了一个半小时吧，这样还剩下3个小时。
+  <br>第五章快看完了，打算接下来先把第五章看完，然后看第三部分，也就是
+  第13章到第15章。
+</label></li>
 </ul>
 <hr>
-<h2>2017年7月2号</h2>
-<h3>目标</h3>
+<h2 id="2017-7-2-">2017年7月2号</h2>
+<h3 id="-">目标</h3>
 <ul>
-<li>[ ] <strong>再看两个小时的面试宝典吧，加上昨天剩下的一共是5个小时</strong>
-上午的话，把第五章看完了，第五章讲得比较泛，讲了一下运算符、类型转换、位运算、等方面的内容，用时1小时，今日目标还剩4小时。</li>
-<li>[ ] <strong>看看糯扎渡的程序能否优化一下内存，尝试从以下几个方面尝试以下：</strong>
-<ol>
-<li>是不是能够用cv::Mat类型来代替IplImage对象<br>
-这个是不行的，在cvtest.exe里面尝试了一下，分别对CvMat和IplImage生成了一个30000*3000*3的一副图像，据测算，CvMat对象占用了257.5MB内存，而IplImage对象占用了257.1MB的内存，因此两者占用内存差不多。对于三通道的30000*3000*3的图像来说，其需要的内存为<code>30000*3000*3/2^20=257.49MB</code>，因此CvMat和IplImage占用的空间实际上和原始数据差不了多少。</li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>再看两个小时的面试宝典吧，加上昨天剩下的一共是5个小时</strong>
+上午的话，把第五章看完了，第五章讲得比较泛，讲了一下运算符、类型转换、位运算、等方面的内容，用时1小时，今日目标还剩4小时。
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>看看糯扎渡的程序能否优化一下内存，尝试从以下几个方面尝试以下：</strong><ol>
+<li>是不是能够用cv::Mat类型来代替IplImage对象<br>这个是不行的，在cvtest.exe里面尝试了一下，分别对CvMat和IplImage生成了一个30000*3000*3的一副图像，据测算，CvMat对象占用了257.5MB内存，而IplImage对象占用了257.1MB的内存，因此两者占用内存差不多。对于三通道的30000*3000*3的图像来说，其需要的内存为<code>30000*3000*3/2^20=257.49MB</code>，因此CvMat和IplImage占用的空间实际上和原始数据差不了多少。</li>
 <li>优化函数传递时候的不必要的临时对象复制，采用const或者&amp;等方式使得内存占用减小</li>
-<li>有没有办法生成64位的程序，64位的程序是不是可以使用到更多的内存？<br>
-从图中可以看到64位的测试程序可以申请5G的内存都不会导致程序崩溃，因此64位程序确实可以申请到更多的内存空间。但是64位程序生成好像有很多麻烦，貌似是MFC下的很多函数和64位都有些冲突。
-<img src="D:\code\note\imgs\64&#x4F4D;&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x6D4B;&#x8BD5;.png?v=1499222267098" alt="64&#x4F4D;&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x6D4B;&#x8BD5;"></li>
+<li>有没有办法生成64位的程序，64位的程序是不是可以使用到更多的内存？<br>从图中可以看到64位的测试程序可以申请5G的内存都不会导致程序崩溃，因此64位程序确实可以申请到更多的内存空间。但是64位程序生成好像有很多麻烦，貌似是MFC下的很多函数和64位都有些冲突。
+<img src="D:\code\note\imgs\64&#x4F4D;&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x6D4B;&#x8BD5;.png" alt="64&#x4F4D;&#x7A0B;&#x5E8F;&#x5185;&#x5B58;&#x6D4B;&#x8BD5;"></li>
 <li>能不能考虑采用多线程的方式，一个线程的占用内存不超过1G的话，搞几个线程是不是能够调用到更多的内存？</li>
 </ol>
+
+</label></li>
+</ul>
+<hr>
+<h2 id="2017-7-3-">2017年7月3号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>面试书累计到现在的话共计6小时，今天务必保证能看2-3小时</strong>  <pre class="editor-colors lang-text"><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>今天一共看了3小时22分钟，剩余2小时38分钟</span></span></span></div></pre>
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>优化内存，我觉得目前来看可行性较高的是，7月2号提出的第2、3个办法</strong><br>  优化内存的工作已经完成，程序内存奔溃的主要原因是因为<code>pano_image = blendImageofTwoHeight2(pano_image,low_image);</code>这段代码，这里面pano_image是一个结构体，结构体里面有<code>IplImage *</code>指针，当<code>blendImageofTwoHeight2</code>结束之后，<code>pano_image</code>被释放了，但是指针指向的图像数据没有被释放，导致了占用内存越积越多，最终内存崩溃。能够发现这一问题的主要原因是重开了一个测试程序，申请了7226*11064*3的图像，一开始程序占用内存为：
+<img src="D:\code\note\imgs\20170703_use_memory.png" alt="20170703_use_memory">
+  然后申请图像之后，占用内存为：
+<img src="D:\code\note\imgs\20170703_use_memory_large_image.png" alt="  20170703_use_memory_large_image">
+  当申请完如此之大的图像之后，内存占用仅有230MB，根本不需要1GB的内存，说明原始程序肯定是内存没有清干净，于是排查到了上面那段代码，从而问题解决。因此也不需要重新编译64位版本的程序了。<br>  这个例子给了我一个结论，就是如果x是很大的对象的话，<code>x=f(x,y)</code>这样的函数形式是很不靠谱的，这样会导致程序分配两倍的x对象的内存，如果采用<code>f(x,y)</code>这样的形式更加节省内存。
+</label></li>
+</ul>
+<hr>
+<h2 id="2017-7-4-">2017年7月4号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><p><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>今天的主要任务先把几个遥感影像的处理功能集成在一起吧</strong><br>  用控制台的方式好了，用命令行的方式实现这些功能，主要是要把Matlab的代码集成到C++里面，这个需要查一查。<br>  retinex、image naturalization、Mask和Wallis需要转到C++里面  
+</label></p>
+<h4 id="-matlab-c-"><strong>这里正好小结一下Matlab和C++互操作一些方法</strong></h4>
+<p>  这次用到的就是在C++程序里面调用Matlab写好的函数，首先是设置编译器，然后是编译.m文件，用mcc编译文件就行。我这边写.m文件的话，给定输入进行处理，然后程序结束。</p>
+<pre class="editor-colors lang-Matlab"><div class="line"><span class="syntax--text syntax--plain syntax--null-grammar"><span>&nbsp;&nbsp;mbuild&nbsp;-setup</span></span></div><div class="line"><span class="syntax--text syntax--plain syntax--null-grammar"><span>&nbsp;&nbsp;mcc&nbsp;-W&nbsp;cpplib:retinex&nbsp;-T&nbsp;link:lib&nbsp;retinex.m</span></span></div></pre>
+<p>  看一下retinex.m文件的函数定义及参数列表：
+  <img src="D:\code\note\imgs\retinex_function.png" alt="retinex_function">   </p>
+<p>  编译之后我们能得到很多文件，其中retinex.h、retinex.lib和retinex.dll这三个文件是我们需要的，把这三个文件分别放到程序的包含目录、库目录和dll目录（我是放到和.exe文件夹下的）里面，附加依赖库加入以下文件，第一个是生成的lib文件，后面几个是Matlab运行的依赖库。  </p>
+<pre class="editor-colors lang-text"><div class="line"><span class="syntax--text syntax--plain"><span>&nbsp;&nbsp;</span><span class="syntax--meta syntax--paragraph syntax--text"><span>retinex.lib</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;libmx.lib</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;libmex.lib</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;libmat.lib</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;libeng.lib</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;mclmcrrt.lib</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;mclmcr.lib</span></span></span></div></pre><p>  然后设置Matlab里面的目录，如下。第一个是包含目录，第二个是库目录。</p>
+<pre class="editor-colors lang-text"><div class="line"><span class="syntax--text syntax--plain"><span>&nbsp;&nbsp;</span><span class="syntax--meta syntax--paragraph syntax--text"><span>C:\Program&nbsp;Files\MATLAB\R2015b\extern\include</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>&nbsp;&nbsp;C:\Program&nbsp;Files\MATLAB\R2015b\extern\lib\win64\microsoft</span></span></span></div></pre><p>  具体调用代码如下，另外在程序的头文件中需要包含&#39;retinex.h&#39;
+<img src="D:\code\note\imgs\c++_USE_Matlab.png" alt="C++_USE_Matlab">   </p>
+<p>我们看到在C++里面调用的形式为<code>retinex(1,mwOutPath,mwPath)</code>在C++中调用MATLAB的函数如果有返回参数的话，则输入形式为:<code>retinex(输出参数数量,输出参数,...,输出参数,输入参数,输入参数)</code></p>
 </li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>考虑一下毕业设计的方向吧，虽然可能说是改变的可能不太大了，还是有空能好好想一下吧</strong>  
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>工作岗位的选择，再看看吧</strong>
+</label></li>
 </ul>
 <hr>
-<h2>2017年7月3号</h2>
-<h3>目标</h3>
+<h2 id="2017-7-5-">2017年7月5号</h2>
+<h3 id="-">目标</h3>
 <ul>
-<li>[ ] <strong>面试书累计到现在的话共计6小时，今天务必保证能看2-3小时</strong><br>
-今天一共看了3小时22分钟</li>
-<li>[x] <strong>优化内存，我觉得目前来看可行性较高的是，7月2号提出的第2、3个办法</strong><br>
-优化内存的工作已经完成，程序内存奔溃的主要原因是因为<code>pano_image = blendImageofTwoHeight2(pano_image,low_image);</code>这段代码，这里面pano_image是一个结构体，结构体里面有<code>IplImage *</code>指针，当<code>blendImageofTwoHeight2</code>结束之后，<code>pano_image</code>被释放了，但是指针指向的图像数据没有被释放，导致了占用内存越积越多，最终内存崩溃。能够发现这一问题的主要原因是重开了一个测试程序，申请了7226*11064*3的图像，一开始程序占用内存为：
-<img src="D:\code\note\imgs\20170703_use_memory.png?v=1499222267098" alt="20170703_use_memory">
-然后申请图像之后，占用内存为：
-<img src="D:\code\note\imgs\20170703_use_memory_large_image.png?v=1499222267099" alt="  20170703_use_memory_large_image">
-当申请完如此之大的图像之后，内存占用仅有230MB，根本不需要1GB的内存，说明原始程序肯定是内存没有清干净，于是排查到了上面那段代码，从而问题解决。因此也不需要重新编译64位版本的程序了。<br>
-这个例子给了我一个结论，就是如果x是很大的对象的话，<code>x=f(x,y)</code>这样的函数形式是很不靠谱的，这样会导致程序分配两倍的x对象的内存，如果采用<code>f(x,y)</code>这样的形式更加节省内存。</li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>调试遥感影像的几个增强功能</strong><br>  现在的话已经是集成了几个功能了，目前去雾好像有一些问题。<br>  去雾的问题在于没有添加highgui那个lib，从而导致没有具体代码实现imread函数，使得返回的Mat数据为空。
+  现在已经实现的功能有：retinex、dodging(Mask,Wallis)、2% linear stretch、Histgram Equlization、DeHaze based dark channel prior、Dehaze based on dark light vedio、
+</label></li>
 </ul>
 <hr>
-<h2>2017年7月4号</h2>
-<h3>目标</h3>
+<h2 id="2017-7-6-">2017年7月6号</h2>
+<h3 id="-">目标</h3>
 <ul>
-<li>[ ] <strong>今天的主要任务先把几个遥感影像的处理功能集成在一起吧</strong><br>
-用控制台的方式好了，用命令行的方式实现这些功能，主要是要把Matlab的代码集成到C++里面，这个需要查一查。<br>
-retinex、image naturalization、Mask和Wallis需要转到C++里面</li>
-<li>[ ] <strong>考虑一下毕业设计的方向吧，虽然可能说是改变的可能不太大了，还是有空能好好想一下吧</strong></li>
-<li>[ ] <strong>工作岗位的选择，再看看吧</strong></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>完成程序演示</strong>
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>修改遥感影像处理文档</strong>
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>精简程序</strong><br>精简程序过程中，发现无法生成包含Matlab函数的部分，其如果要移植的话必须要安装MCRinstall.exe，而且Matlab2015a版本的MCR还巨大，有700多兆，以前的32位的貌似只有两三百兆，于是再找其他的方法。
+在Matlab中输入<code>coder</code>能够弹出如下界面，然后选择要生成的.M文件。这种方式可以生成独立的C或C++代码，而不必依赖于Matlab运行库，但是我选择了retinex进去，发现很多函数都不支持生成，因此作罢。
+<img src="D:\code\note\imgs\matlabcoder.png" alt="MatlabCoder">
+</label></li>
 </ul>
 <hr>
-<h2>2017年7月5号</h2>
-<h3>目标</h3>
+<h2 id="2017-7-7-">2017年7月7号</h2>
+<h3 id="-">目标</h3>
 <ul>
-<li>[ ] <strong>调试遥感影像的几个增强功能</strong><br>
-现在的话已经是</li>
+<li><p><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>通过<a href="http://lbs.amap.com/api/webservice/guide/api/direction#driving">高德API</a>，获取两个GPS轨迹点之间的红绿灯数目</strong><br>直接用以前爬自行车数据的代码应该可以了，不过换了新的线程对象，一个线程对象里面设置10个线程去获取数据，线程对象可以返回得到线程函数得到的返回值，当线程执行完毕之后，返回获取到的值，将值写入到一个数据写入缓存区也就是一个list对象，检测list对象数目超过指定数目的时候将数据写入文件，每写入一条就把对应的数据读取缓存区list对象里面的数据记录删除掉。
+</label></p>
+<hr>
+<h2 id="2017-7-8-">2017年7月8号</h2>
+<h3 id="-">目标</h3>
+</li>
+<li><p><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>优化了轨迹点之间获取红绿灯数目的数据爬取程序</strong><br>解决了一些bug，比如获取当前是否进入下一天出错；在填充data_read的时候，设置的是<code>for i in range(0,MAX_COUNT)</code>因此当文件剩余的行数没有那么多的时候会导致程序出错，不过这个还没有改。
+</label></p>
+<hr>
+<h2 id="2017-7-9-">2017年7月9号</h2>
+<h3 id="-">目标</h3>
+</li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>今天貌似没做什么</strong><br>看了半个下午和一晚上的LPL比赛...看了一个小时的面试书籍。
+</label></li>
 </ul>
 <hr>
-<h2>2017年7月6号</h2>
-<h3>目标</h3></body>
+<h2 id="2017-7-10-">2017年7月10号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>糯扎渡程序，大图的显示问题 </strong><br><strong>可以通过几个方式来解决这个问题：</strong>
+</label></li>
+<li>第一种是可以采用类似于ENVI的方式，有两到三个窗口，分别是Scroll、Image和Zoom，其中Scroll显示的全图或者是缩略图，上面有一个矩形框显示的Image的显示范围，Image窗口显示的就是矩形框中图像的原始尺寸，Zoom窗口显示的是放大图像。</li>
+<li>第二是对图像进行切片，然后按照层级逐层显示。
+3.</li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>继续看书啊，不要停</strong><br>欠下15个小时多了... 抓紧
+</label></li>
+</ul>
+<hr>
+<h2 id="2017-7-11-">2017年7月11号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>尝试了几个网上的代码</strong>
+</label></li>
+<li><a href="https://github.com/timknapen/ofxGiantImage">ofxGiantImage</a><br>这个工具依赖于OpenFramework开源库，从昨天开始一直安装这个OpenFramework开源库，但是一开始安装的是V0.7.1_VS2010_Release，一直无法编译，在iconic.h中一直报编码错误，无法解决。于是尝试最新版V0.9.8版，官网上说明这个版本是在VS2015下编译的，于是再电脑上装VS2015 Community版，下完iso文件，打开发现还需要装7G的Visual C++支持包，醉了。最终是找到了V0.7.4_vs2010_release这个版本的OpenFramework库，下载解压之后打开projectGenerator\projectGenerator.exe文件生成新项目，打开界面是这样的：<br><img src="D:\code\note\imgs\of_projectgenerator.png" alt="of_projectGenerator">
+运行生成的项目，导入ofxGiantImage.h和cpp文件发现是可以运行的，运行界面如下，自带的2万*1万5分辨率的图像无法加载出来，在图像读取的时候就已经崩溃了，加载10000*7500像素的图片是没有问题的，而且占用内存非常低。图像的显示是挺流畅的，但是无法进行图像的缩放和鼠标拖拽平移。
+<img src="D:\code\note\imgs\ofxgiantimage_dialog.png" alt="ofxGiantImage_Dialog">
+<img src="D:\code\note\imgs\ofxgiantimage_memory.png" alt="ofxGiantImage_Memory">
+在查看图像显示的源码的时候，看到显示了图像的格网。
+<img src="D:\code\note\imgs\ofxgiantimage_grid.png" alt="ofxGiantImage_Grid">
+通过查看代码，我们可以发现程序将图像分成15*20大小的格网，然后把每个格网的图像放到一个<code>vector &lt;ofTexture*&gt; tiles</code>的向量中，其中分带格网分配内存<code>tile-&gt;allocate(tileWidth, tileHeight, GL_RGB);</code>并不会增加图像内存消耗，然后当图像清空之后，内存占用就非常低了，挺奇怪的。
+占用内存降低可能的原因是该程序用了纹理来显示图片，而且其图像貌似还没有完整覆盖整个图像区域，每个纹理是512*512的区域，转成纹理会导致图像的质量下降，如下进行对比：
+<img src="D:\code\note\imgs\ofxgiantimage_image.png" alt="ofxGiantImage_Image">
+<img src="D:\code\note\imgs\irfanview_image.png" alt="IrfanView_Image">
+同样的一块区域，原始图像的清晰度显然要更高，而在程序之中的清晰度不够，因此数据质量得到了损失。</li>
+<li>Simple2D
+基于OpenGL实现的图像显示程序，其中有一个auto关键字，好像在VS2010下面支持并不好，于是转到VS2015设置一下项目的平台工具集属性就可以直接编译运行了，但是显示的图片无法平移缩放，显示的图像貌似也有一些问题。</li>
+<li>DeepZoom
+在VS2010中编译的话，一直缺少DirectXMath.h，在VS2015中编译没有这个问题，但是<code>&lt;hashtable.h&gt;</code>文件中用到模板的又出现了问题，所以并没有调通这个程序。</li>
+</ul>
+<hr>
+<h2 id="2017-7-12-">2017年7月12号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>按照ENVI显示的方式来显示竖井全图</strong>
+</label></li>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox" checked>
+   <strong>催审</strong><br>7月13号上午询问论文进展。
+</label></li>
+</ul>
+<hr>
+<h2 id="2017-7-13-">2017年7月13号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong>竖井全图显示模块</strong><br>首先我们来看一下三个打开全图的程序的耗费内存情况：
+</label></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">程序名称</th>
+<th style="text-align:left">程序阶段</th>
+<th style="text-align:left">耗费内存情况</th>
+<th>加载、浏览是否流畅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">windows照片查看器</td>
+<td style="text-align:left">完成加载、显示</td>
+<td style="text-align:left">无法查看</td>
+<td>加载速度很快、浏览很快</td>
+</tr>
+<tr>
+<td style="text-align:left">irfanView 32bit</td>
+<td style="text-align:left">完成加载、显示</td>
+<td style="text-align:left">334.2MB</td>
+<td>加载速度一般、浏览很快</td>
+</tr>
+<tr>
+<td style="text-align:left">ENVI 4.7 32bit</td>
+<td style="text-align:left">完成数据加载、读取</td>
+<td style="text-align:left">357.6MB</td>
+<td>加载速度一般、浏览很快</td>
+</tr>
+<tr>
+<td style="text-align:left">ENVI 4.7 32bit</td>
+<td style="text-align:left">进行数据浏览</td>
+<td style="text-align:left">410.1MB--&gt;359.5MB</td>
+<td>加载速度一般、浏览很快</td>
+</tr>
+<tr>
+<td style="text-align:left">cvtest 64bit</td>
+<td style="text-align:left">分配7226*15712大小的图像</td>
+<td style="text-align:left">327.0MB</td>
+<td>加载速度一般、浏览卡住</td>
+</tr>
+<tr>
+<td style="text-align:left">cvtest 64bit</td>
+<td style="text-align:left">用cvShowImage显示图像</td>
+<td style="text-align:left">659.6MB</td>
+<td>加载速度一般、浏览卡住</td>
+</tr>
+<tr>
+<td style="text-align:left">mySketch 64bit</td>
+<td style="text-align:left">加载数据阶段</td>
+<td style="text-align:left">665.9MB</td>
+<td>加载速度慢、浏览非常流畅</td>
+</tr>
+<tr>
+<td style="text-align:left">mySketch 64bit</td>
+<td style="text-align:left">纹理创建完成</td>
+<td style="text-align:left">40.1MB</td>
+<td>加载速度慢、浏览非常流畅</td>
+</tr>
+<tr>
+<td style="text-align:left">mySketch 64bit</td>
+<td style="text-align:left">数据浏览阶段</td>
+<td style="text-align:left">40.1MB+显存占用多出446MB</td>
+<td>加载速度慢、浏览非常流畅</td>
+</tr>
+<tr>
+<td style="text-align:left">ArcMap</td>
+<td style="text-align:left">完成数据加载、数据浏览</td>
+<td style="text-align:left">100MB</td>
+<td>加载速度很快、浏览卡顿需要等待加载</td>
+</tr>
+<tr>
+<td style="text-align:left">mfcDrawCrack 32bit</td>
+<td style="text-align:left">分配7226*15712大小的图像</td>
+<td style="text-align:left">334.1MB</td>
+<td>加载速度一般、浏览流畅</td>
+</tr>
+<tr>
+<td style="text-align:left">mfcDrawCrack 32bit</td>
+<td style="text-align:left">分配压缩比例0.5的缩略图</td>
+<td style="text-align:left">415.4MB</td>
+<td>加载速度一般、浏览流畅</td>
+</tr>
+<tr>
+<td style="text-align:left">mfcDrawCrack 32bit</td>
+<td style="text-align:left">分配500*500的局部放大图</td>
+<td style="text-align:left">416.1MB</td>
+<td>加载速度一般、浏览流畅</td>
+</tr>
+<tr>
+<td style="text-align:left">mfcDrawCrack 32bit</td>
+<td style="text-align:left">压缩比例0.1,500*500的局部放大图</td>
+<td style="text-align:left">338.6MB</td>
+<td>加载速度一般、浏览流畅</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>值得注意的是irfanView已经是实现了整个功能，占用内存比较稳定，这个程序肯定是没有分块的。在浏览缩放的过程中，浏览非常稳定。</li>
+<li>另外ArcMap中的机制也是比较奇怪的，感觉其占用内存的一直特别低，一直稳定在100MB左右，其硬盘读写速度也很低，创建完金字塔也是如此。但是在浏览缩放的过程中，非常卡顿，经常是出现空白，要等很一会才能出现影像。</li>
+<li>mySketch的话，利用纹理加载影像，在一开始占用内存较多，从341.1MB跳到665.9MB再降到341.1MB，但是之后一直稳定在40多兆的样子吧，但是观察显存占用从824MB涨至1170MB，多出了446MB，我估计是将图像读取至显存中了，导致内存占用变低。</li>
+<li>ENVI的话，读取完图像之后程序占用内存稳定在357.6MB，在显示图像的时候瞬间增加到410多兆，随后降低至359.5MB，显存占用没有发生变换，说明ENVI是将图片完整读取到内存中的，在显示的过程进行不断的切分，在浏览过程中程序并没有卡顿。
+<img src="D:\code\note\imgs\irfanview_windows_contrast.png" alt="irfanView_Windows_contrast">
+irfanview、Windows照片查看器、myStetch的局部细节对比
+<img src="D:\code\note\imgs\imgs_contrast.png" alt="imgs_contrast">
+irfanview、Envi的局部细节对比
+<img src="D:\code\note\imgs\irfanview_envi_contrast.png" alt="irfanView_envi_contrast"></li>
+</ul>
+<hr>
+<h3 id="git-">Git使用记录</h3>
+<h4 id="1-git">1. 安装Git</h4>
+<p>电脑系统是win10.因此下载的是<a href="https://git-for-windows.github.io/">Git for windows</a>。安装过程都是采用默认的参数，一路下一步。</p>
+<h4 id="2-repository-ssh-key">2. 创建Repository和SSH key</h4>
+<h5 id="2-1-repository">2.1 创建Repository</h5>
+<ul>
+<li>打开GitHub网站--&gt;进入个人主页--&gt;Repositories--&gt;New--&gt;在[Repository name]输入名称HelloGit，在[Description]文本框中输入项目描述，免费用户只能选择Public--&gt;勾选Initialize this repository with a README<h5 id="2-2-ssh-key">2.2 创建SSH key</h5>
+</li>
+<li>打开安装好的Git Bash，输入命令设置ssh秘钥：<code>ssh-keygen</code>，运行之后需要输入存储秘钥的文件名以及查看密码，我这边都是没输，直接Enter按照默认进行下去，命令提示窗口输出：  <pre class="editor-colors lang-text"><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>$&nbsp;ssh-keygen</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Generating&nbsp;public/private&nbsp;rsa&nbsp;key&nbsp;pair.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Enter&nbsp;file&nbsp;in&nbsp;which&nbsp;to&nbsp;save&nbsp;the&nbsp;key&nbsp;(/c/Users/Administrator/.ssh/id_rsa):</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Enter&nbsp;passphrase&nbsp;(empty&nbsp;for&nbsp;no&nbsp;passphrase):</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Enter&nbsp;same&nbsp;passphrase&nbsp;again:</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Your&nbsp;identification&nbsp;has&nbsp;been&nbsp;saved&nbsp;in&nbsp;/c/Users/Administrator/.ssh/id_rsa.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Your&nbsp;public&nbsp;key&nbsp;has&nbsp;been&nbsp;saved&nbsp;in&nbsp;/c/Users/Administrator/.ssh/id_rsa.pub.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>The&nbsp;key&nbsp;fingerprint&nbsp;is:</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>SHA256:ndKHdah92wO0YBl0LFHZwwK1FYLW4aeolrgSh3QijQo&nbsp;Administrator@westchen-PC</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>The&nbsp;key&#39;s&nbsp;randomart&nbsp;image&nbsp;is:</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>+---[RSA&nbsp;2048]----+</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|&nbsp;&nbsp;&nbsp;.+o*=o.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|&nbsp;&nbsp;&nbsp;&nbsp;=o=++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|&nbsp;o&nbsp;.&nbsp;+o...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|Eo..+..o&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|=.o..o..S&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|+..+&nbsp;.s.&nbsp;=&nbsp;.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|.s=&nbsp;o&nbsp;o..&nbsp;o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|.o&nbsp;.&nbsp;.&nbsp;o..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>|o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.&nbsp;..&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>+----[SHA256]-----+</span></span></span></div></pre></li>
+<li>生成完秘钥之后输入<code>ls</code>应该会有如下结果显示：
+<img src="D:\code\note\imgs\ls_git.png" alt="ls_git"><br>其中id_rsa.pub就是秘钥，输入<code>cat id_rsa.pub</code>查看秘钥，复制这段秘钥从<code>ssh-rsa</code>开始一直到<code>Administrator@Ws-PC</code>，然后进入GitHub个人中心--&gt;Edit Profile--&gt;点击 SSH and GPG keys--&gt; New SSH key--&gt;输入标题，把刚才复制的秘钥粘贴到key文本框下--&gt;点击Add SSH key完成秘钥添加。  </li>
+<li>输入<code>ssh -T git@github.com</code>测试SSH秘钥是否建立，如果成功则有<code>Hi ***! You&#39;ve successfully authenticated,but GitHub does not proviede shell access</code>的提示，这说明你已经连接上你的。<h4 id="3-git-">3. 利用Git进行文件同步</h4>
+</li>
+<li>我们现在在Github上创建了一个空的Repository，接下来我们要把本地的文件提交到这个空的Repository中，首先我们需要在本地创建一个git项目，然后将本地的git项目同步到git服务器上去。<h5 id="3-1-git-">3.1 进行本地git文件的创建</h5>
+</li>
+<li>进入到需要同步的文件目录下:<code>cd /d/code/note</code>。这是指进入&#39;D:/code/note&#39;目录下（注意Windows下文件目录是反斜杠，这边是斜杠）。  </li>
+<li>输入<code>git init</code>进行本地git初始化，控制台提示<code>Initialized empty Git repository in D:/code/note/.git/</code>，说明已经初始化完毕。  </li>
+<li>输入<code>git add diary.md</code>，是把当前目录下的diary.md文档加入到本地的git项目下了，如果嫌这样添加太慢，则输入<code>git add -A</code>则会将本目录及子目录下所有的文件都加入git项目中。  </li>
+<li>输入<code>git show</code>可以查看本地git项目添加了多少文件以及文件的状态。如果你不知道还有什么命令以及命令的用法，输入<code>git --help</code>可以查看帮助文档。  </li>
+<li>输入<code>git commit -m &#39;first commit&#39;</code>则把当前的修改进行了首次的提交，当然此时还没有提交到GitHub的服务器上。需要注意的是，只有进行commit之后才会把更改保存到本地的git项目中。<h5 id="3-2-git-">3.2 将本地的git文件同步到服务器上</h5>
+</li>
+<li>当我们把本地的git项目编辑好之后，可以开始进行和服务器的同步了。这里面有很多的操作，在这边我们是想把本地的文件提交到服务器上，输入<code>git remote add origin git@github.com:用户名/Repository项目名称.git</code>其中用户名为你自己的用户名，Repository名称填写你刚才创建的空的Repository，这样的话你已经建立了此电脑和服务器上创建的项目的连接。  </li>
+<li>输入<code>git pull origin master --allow-unrelated-histories</code>，这句话是取回服务器的master更新，然后输入<code>git push origin master</code>将本地的git项目同步到服务器上，可以看到控制台输出如下结果：  <pre class="editor-colors lang-text"><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Counting&nbsp;objects:&nbsp;5,&nbsp;done.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Delta&nbsp;compression&nbsp;using&nbsp;up&nbsp;to&nbsp;4&nbsp;threads.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Compressing&nbsp;objects:&nbsp;100%&nbsp;(4/4),&nbsp;done.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Writing&nbsp;objects:&nbsp;100%&nbsp;(5/5),&nbsp;7.14&nbsp;KiB&nbsp;|&nbsp;0&nbsp;bytes/s,&nbsp;done.</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>Total&nbsp;5&nbsp;(delta&nbsp;0),&nbsp;reused&nbsp;0&nbsp;(delta&nbsp;0)</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span class="syntax--meta syntax--paragraph syntax--text"><span>To&nbsp;github.com:*****/******.git</span></span></span></div><div class="line"><span class="syntax--text syntax--plain"><span>&nbsp;</span><span class="syntax--meta syntax--paragraph syntax--text"><span>5267a88..b8419dd&nbsp;&nbsp;master&nbsp;-&gt;&nbsp;master</span></span></span></div></pre></li>
+<li>这样就能完成同步了，打开自己的GitHub主页，进入到刚才的Repository中，可以看到刚才加载的文件都已经提交上来了。<h3 id="-">参考资料</h3>
+</li>
+<li><a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html">Git远程操作详解</a></li>
+<li><a href="http://blog.csdn.net/u010853261/article/details/51935503">git2.9.2使用总结</a></li>
+<li><a href="https://git-scm.com/book/zh/v1/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E7%9A%84-Git-%E7%94%9F%E6%88%90-SSH-%E5%85%AC%E9%92%A5">4.3 服务器上的 Git - 生成 SSH 公钥</a></li>
+<li><a href="http://blog.csdn.net/emaste_r/article/details/19560321">windows下使用git管理github项目（入门）</a></li>
+<li><a href="http://www.cnblogs.com/wei325/p/5278922.html">git中Please enter a commit message to explain why this merge is necessary.</a></li>
+</ul>
+<hr>
+<h2 id="2017-7-14-">2017年7月14号</h2>
+<h3 id="-">目标</h3>
+<ul>
+<li><label>
+  <input type="checkbox" class="task-list-item-checkbox">
+   <strong> </strong>  
+</label></li>
+</ul></body>
 </html>
